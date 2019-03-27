@@ -1,0 +1,43 @@
+<include href="header.htm" />
+<div class="container py-5">
+	<div class="row">
+		<div class="col-12">
+		<h1>{{ @i18n_errorpage_header }}</h1>
+
+<switch expr="{{ @ERROR.code }}">
+    <case value="401" break="{{ TRUE }}">
+		<p>{{ @i18n_401 }}</p>
+		<p><a href="/login">Log in</a></p>
+    </case>
+	<case value="403" break="{{ TRUE }}">
+		<p>{{ @i18n_403 }}</p>
+    </case>
+	<case value="404" break="{{ TRUE }}">
+		<p>{{ @i18n_404 }}</p>
+    </case>
+	<case value="405" break="{{ TRUE }}">
+		<p>{{ @i18n_405 }}</p>
+    </case>
+	<case value="500" break="{{ TRUE }}">
+		<p>{{ @i18n_500 }}</p>
+    </case>
+
+    <default>
+		<p>{{ @i18n_othererror }}</p>
+    </default>
+</switch>
+
+  
+<exclude>
+for debugging only
+ ({{ @ERROR.code }}): {{ @ERROR.text }}
+  {{ print_r(@ERROR) }}
+  SESSION:
+  {{ print_r(@SESSION) }}
+</exclude>
+
+		</div>
+	</div>
+</div>
+
+<include href="footer.htm" />

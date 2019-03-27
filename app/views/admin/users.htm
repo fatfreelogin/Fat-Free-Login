@@ -1,0 +1,29 @@
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+			<h1>{{ @i18n_users }}</h1>	
+			<table class="table table-hover table-striped table-bordered" id="list">
+				<thead>
+					<tr>
+						<th scope="col">username</th>
+						<th scope="col">usertype</th>
+						<th scope="col">created_at</th>
+						<th scope="col">updated_at</th>
+					</tr>
+				</thead>
+				<tbody>
+				<repeat group="{{ @users }}" value="{{ @user }}">
+					<tr onclick="window.document.location='admin/users/{{ @user.id }}';" style="cursor: pointer;">
+						<td>{{ @user.username }}</td>
+						<td><check if="@user.user_type===100"><true><em>Administrator</em></true>
+						<false><check if="@user.user_type===10"><true><em>Superuser</em></true><false>Standard User</false></check></false></check></td>
+						<td>{{ @user.created_at }}</td>
+						<td>{{ @user.updated_at}}</td>
+					</tr>	
+				</repeat>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+

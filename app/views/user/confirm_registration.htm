@@ -1,0 +1,15 @@
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+			<h1>{{ @i18n_registration }}</h1>
+			<check if=" @POST.registration_ok ">
+				<true>
+					<p>{{ @i18n_reg_conf_success |raw }}</p>
+				</true>
+				<false>
+					<p>{{ @i18n_registration_confirmation_failed }}</p>
+				</false>	
+			</check>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container py-5">
+	<div class="row">
+		<div class="col-12">
+			<h1>Fat Free Login</h1>
+			<check if="{{ @SESSION.logged_in }}">
+				<true>
+					<p>Welcome {{ @SESSION.username }}!</p>
+					<p>You managed to log in succesfully. Have a look at the options in the menu item with your username. </p>
+					<p>
+				  <a class="btn btn-lg btn-primary" href="/user/update">Go to your settings</a>
+				  <a class="btn btn-lg btn-warning" href="/logout">Logout</a></p>
+				</true>
+				<false>
+					<p>Congratulations on installing the Fat Free Login script. You are not logged in right now. </p>
+					<p><a href="/login">You can login here</a>.</p>
+				</false>
+			</check>
+		</div>
+	</div>
+</div>
