@@ -35,6 +35,8 @@ PHPMailer (located in the lib folder)
 - database settings
 - mail smtp settings
 
+Active login is admin:fatfree123
+
 ## Contributing
 This script is offered as is. 
 Feel free to contribute to this and update as you like.
