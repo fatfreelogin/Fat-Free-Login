@@ -1,12 +1,7 @@
 <?php
 
 class UserController extends Controller {
-/*
-	public function mail_sent()
-	{
-        $this->f3->set('view','user/mail_sent.htm');
-	}
-*/
+
 	public function confirm_registration()
 	{
 		$user = new User($this->db);
@@ -56,7 +51,7 @@ class UserController extends Controller {
 		$user->checkActivatedHash($this->f3->get('GET.h'));
 		$this->f3->set('SESSION.user_id',$user->id);
 
-        if($this->f3->exists('POST.reset_pw')){
+		if($this->f3->exists('POST.reset_pw')){
 			$pwcheck = $this->check_password( $this->f3->get('POST.new_password') , $this->f3->get('POST.confirm'));
 			if (strlen($pwcheck) > 0) //pwcheck error message returned
 			{
@@ -84,6 +79,7 @@ class UserController extends Controller {
 			$this->f3->set('view','page/message.htm');
 		}
 	}
+	
 	
 	private function setpw( $newpw, $user_id )
 	{
@@ -144,11 +140,11 @@ class UserController extends Controller {
 	
 	public function success()
 	{
-        $this->f3->set('view','user/success.htm');
+		$this->f3->set('view','user/success.htm');
 	}
 	
 	public function sendactmail($email, $hash)
-    {
+	{
 		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST')."/confirm_registration?h=".$hash;
 		$mail = new Mail();
 		$mail->send( // sender, recipient, subject, msg
@@ -160,7 +156,7 @@ class UserController extends Controller {
 		
 	}
 	private function pw_reset_mail($email, $hash)
-    {
+	{
 		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST')."/pw_reset?h=".$hash;
 		$mail = new Mail();
 		$mail->send( // sender, recipient, subject, msg
@@ -173,9 +169,9 @@ class UserController extends Controller {
 	}
 	
 	public function sendactivationmail()
-    {
-        if($this->f3->exists('POST.sendmail'))
-        {
+	{
+		if($this->f3->exists('POST.sendmail'))
+		{
 			$hash=$this->createHash();
 			$user = new User($this->db);
 			$user->getByEmail($this->f3->get('POST.email'));
@@ -191,6 +187,7 @@ class UserController extends Controller {
 			$this->f3->set('view','user/send_activation_mail.htm');
 		}
 	}
+	
 	private function check_password($pw, $confirm)
 	{
 		if(strlen($pw) < 8)
@@ -206,10 +203,10 @@ class UserController extends Controller {
 			return "";
 		}		
 	}
-    public function create()
-    {
-        if($this->f3->exists('POST.create'))
-        {
+	public function create()
+	{
+		if($this->f3->exists('POST.create'))
+		{
 			$pwcheck = $this->check_password( $this->f3->get('POST.password'), $this->f3->get('POST.confirm'));
 			if (strlen($pwcheck) > 0)
 			{ 
@@ -253,21 +250,21 @@ class UserController extends Controller {
 					$this->f3->set('view','user/create.htm');
 				}
 			}
-        } 
+		} 
 		else
-        {
-            $this->f3->set('view','user/create.htm');
-        }
-    }
+		{
+			$this->f3->set('view','user/create.htm');
+		}
+	}
 
-    public function login()
-    {
+	public function login()
+	{
 		if( $this->f3->get('SESSION.logged_in'))
 		{
 			$this->f3->reroute('/');
 		}
-        else if($this->f3->exists('POST.login')) // OR $this->f3->VERB=='POST'
-        {
+		else if($this->f3->exists('POST.login')) // OR $this->f3->VERB=='POST'
+		{
 			$ip = $_SERVER['REMOTE_ADDR'];
 			if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 				$ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -303,43 +300,43 @@ class UserController extends Controller {
 				$this->f3->set('SESSION.timestamp', time());
 				$this->f3->reroute('/');
 			}
-        } 
+		} 
 		else
-        {
-            $this->f3->set('page_head','Login');
-            $this->f3->set('view','user/login.htm');
-        }
-
-    }
-    public function logout()
-    {
-        $this->f3->clear('SESSION');
+		{
+			$this->f3->set('page_head','Login');
+			$this->f3->set('view','user/login.htm');
+		}
+	}
+	
+	public function logout()
+	{
+		$this->f3->clear('SESSION');
 		$this->f3->set('page_head','Logout');
-        $this->f3->reroute('/');
-    }
+		$this->f3->reroute('/');
+	}
 
-    public function update()
-    {
-        $user = new User($this->db);
+	public function update()
+	{
+		$user = new User($this->db);
 
-        if($this->f3->exists('POST.update'))
-        {
-            $user->edit($this->f3->get('POST.id'));
-            $this->f3->reroute('/success/User Updated');
-        } 
+		if($this->f3->exists('POST.update'))
+		{
+			$user->edit($this->f3->get('POST.id'));
+			$this->f3->reroute('/success/User Updated');
+		} 
 		else
-        {
-            $user->getById($this->f3->get('PARAMS.id'));
-            $this->f3->set('user',$user);
-            $this->f3->set('page_head',$this->f3->get('i18n_changepassword'));
-            $this->f3->set('view','admin/update.htm');
-        }
-    }
+		{
+			$user->getById($this->f3->get('PARAMS.id'));
+			$this->f3->set('user',$user);
+			$this->f3->set('page_head',$this->f3->get('i18n_changepassword'));
+			$this->f3->set('view','admin/update.htm');
+		}
+	}
 
 	public function lostpassword()
 	{
-        if($this->f3->exists('POST.reset_pw'))
-        {
+		if($this->f3->exists('POST.reset_pw'))
+		{
 			$hash=$this->createHash();
 			$user = new User($this->db);
 			$user->getByEmail($this->f3->get('POST.email'));
@@ -353,9 +350,9 @@ class UserController extends Controller {
 			$this->f3->set('view','page/message.htm');
 		} 
 		else
-        {
-            $this->f3->set('view','user/reset-pw.htm');
-        }
+		{
+			$this->f3->set('view','user/reset-pw.htm');
+		}
 	}
 
 	private function createHash()
@@ -363,13 +360,13 @@ class UserController extends Controller {
 		return md5( str_shuffle(time(). $this->f3->get('POST.username') . $this->f3->get('POST.email') ) );
 	}
 
-    public function delete()
-    {
-        if($this->f3->exists('PARAMS.id'))
-        {
-            $user = new User($this->db);
-            $user->delete($this->f3->get('PARAMS.id'));
-        }
-        $this->f3->reroute('/success/User Deleted');
-    }
+	public function delete()
+	{
+		if($this->f3->exists('PARAMS.id'))
+		{
+			$user = new User($this->db);
+			$user->delete($this->f3->get('PARAMS.id'));
+		}
+		$this->f3->reroute('/success/User Deleted');
+	}
 }

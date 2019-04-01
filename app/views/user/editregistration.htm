@@ -1,10 +1,10 @@
 <h1>{{ @i18n_update_user }}</h1>
 
 <check if="{{ isset(@message) }}">
-    <true>
+	<true>
 	<div class="row alert alert-{{ @alert_type }}" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
+	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	<span class="sr-only">Error:</span>
 	{{ @message | raw }}
 	</div>
 	</true>

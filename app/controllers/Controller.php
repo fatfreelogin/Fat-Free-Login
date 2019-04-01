@@ -19,14 +19,14 @@ class Controller {
 		}
 		$csrf_page = $this->f3->get('PARAMS.0'); //URL route !with preceding slash!
 
-        if( NULL === $this->f3->get('POST.session_csrf') )
+		if( NULL === $this->f3->get('POST.session_csrf') )
 		{
 			$this->f3->CSRF = $this->f3->session->csrf();
 			$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');
 		}
 		if ($this->f3->VERB==='POST')
 		{
-            if(  $this->f3->get('POST.session_csrf') ==  $this->f3->get('SESSION.'.$csrf_page.'.csrf') ) 
+			if(  $this->f3->get('POST.session_csrf') ==  $this->f3->get('SESSION.'.$csrf_page.'.csrf') ) 
 			{	// Things check out! No CSRF attack was detected.
 				$this->f3->set('CSRF', $this->f3->session->csrf()); // Reset csrf token for next post request
 				$this->f3->copy('CSRF','SESSION.'.$csrf_page.'.csrf');  // copy the token to the variable
@@ -35,7 +35,7 @@ class Controller {
 			{	// DANGER: CSRF attack!
 				$this->f3->error(403); 
 			}
-        }
+		}
 		
 		$access=Access::instance();
 		$access->policy('allow'); // allow access to all routes by default
@@ -56,12 +56,12 @@ class Controller {
 	}
 
 	function __construct() {
-        $f3=Base::instance();
-        $db=new DB\SQL(
-            $f3->get('db_dns') . $f3->get('db_name'),
-            $f3->get('db_user'),
-            $f3->get('db_pass')
-        );
+		$f3=Base::instance();
+		$db=new DB\SQL(
+			$f3->get('db_dns') . $f3->get('db_name'),
+			$f3->get('db_user'),
+			$f3->get('db_pass')
+		);
 		$this->f3=$f3;
 		$this->db=$db;
 	}	

@@ -5,7 +5,7 @@ class AdminController extends Controller {
 	protected $db;
 		
 	public function users()
-    {	
+	{	
         $users = new User($this->db);
 		$this->f3->set('users',$users->all());
 		$this->f3->set('view','admin/users.htm');
@@ -67,5 +67,5 @@ class AdminController extends Controller {
 		}
 
 		$this->f3->set('view','admin/userdetails.htm');
-    }
+	}
 }
