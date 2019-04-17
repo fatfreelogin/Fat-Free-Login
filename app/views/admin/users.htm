@@ -13,7 +13,7 @@
 				</thead>
 				<tbody>
 				<repeat group="{{ @users }}" value="{{ @user }}">
-					<tr onclick="window.document.location='admin/users/{{ @user.id }}';" style="cursor: pointer;">
+					<tr onclick="window.document.location='{{ @BASE }}/admin/users/{{ @user.id }}';" style="cursor: pointer;">
 						<td>{{ @user.username }}</td>
 						<td><check if="@user.user_type===100"><true><em>Administrator</em></true>
 						<false><check if="@user.user_type===10"><true><em>Superuser</em></true><false>Standard User</false></check></false></check></td>

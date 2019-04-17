@@ -1,0 +1,142 @@
+[
+    {
+        "name": "bcosca/fatfree-core",
+        "version": "3.6.5",
+        "version_normalized": "3.6.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bcosca/fatfree-core.git",
+            "reference": "c5aa056d2111e666e87f6129fe633c6a2aeeaae2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/c5aa056d2111e666e87f6129fe633c6a2aeeaae2",
+            "reference": "c5aa056d2111e666e87f6129fe633c6a2aeeaae2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "time": "2018-12-24T13:37:45+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "."
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0"
+        ],
+        "description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
+        "homepage": "http://fatfreeframework.com/"
+    },
+    {
+        "name": "phpmailer/phpmailer",
+        "version": "v6.0.7",
+        "version_normalized": "6.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPMailer/PHPMailer.git",
+            "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/0c41a36d4508d470e376498c1c0c527aa36a2d59",
+            "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-filter": "*",
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "doctrine/annotations": "1.2.*",
+            "friendsofphp/php-cs-fixer": "^2.2",
+            "phpdocumentor/phpdocumentor": "2.*",
+            "phpunit/phpunit": "^4.8 || ^5.7",
+            "zendframework/zend-eventmanager": "3.0.*",
+            "zendframework/zend-i18n": "2.7.3",
+            "zendframework/zend-serializer": "2.7.*"
+        },
+        "suggest": {
+            "ext-mbstring": "Needed to send email in multibyte encoding charset",
+            "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+            "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+            "psr/log": "For optional PSR-3 debug logging",
+            "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+            "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
+        },
+        "time": "2019-02-01T15:04:28+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PHPMailer\\PHPMailer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
+            },
+            {
+                "name": "Marcus Bointon",
+                "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Andy Prevost",
+                "email": "codeworxtech@users.sourceforge.net"
+            },
+            {
+                "name": "Brent R. Matzelle"
+            }
+        ],
+        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "xfra35/f3-access",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/xfra35/f3-access.git",
+            "reference": "7b62d1c0e0a881c8b2e510fee31863fc44afa7b7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/xfra35/f3-access/zipball/7b62d1c0e0a881c8b2e510fee31863fc44afa7b7",
+            "reference": "7b62d1c0e0a881c8b2e510fee31863fc44afa7b7",
+            "shasum": ""
+        },
+        "require": {
+            "bcosca/fatfree-core": "3.*"
+        },
+        "time": "2016-02-18T14:42:16+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0"
+        ],
+        "description": "Route access control for the PHP Fat-Free Framework",
+        "homepage": "https://github.com/xfra35/f3-access",
+        "keywords": [
+            "F3",
+            "access control",
+            "fatfree",
+            "permissions"
+        ]
+    }
+]
