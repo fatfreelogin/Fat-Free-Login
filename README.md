@@ -28,7 +28,9 @@ PHPMailer (located in the lib folder)
 
 3. Copy PHPMailer to the lib folder (https://github.com/PHPMailer/PHPMailer/tree/master/src)
 
-4. Set the /config/config.ini file:
+4. Set up your database and use the create_db.sql to create the tables and admin login 
+
+5. Set the /config/config.ini file:
 - DEBUG (0, 1, 2 or 3)
 - ssl (http:// or https://)
 - auto_logout time (automatically log out user after so many seconds of inactivity)
