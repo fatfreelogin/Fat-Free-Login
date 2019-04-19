@@ -10,7 +10,8 @@ The script offers the following possibilities:
 - access to pages is controlled by f3-access
 - automatic logout after configurable amount of time 
 - admin section with user management
-- csrf protection (in controllers/Controller.php)
+- csrf protection (in /app/controllers/Controller.php)
+- error logs and access logs in /logs
 
 ## Getting started
 
@@ -28,7 +29,9 @@ PHPMailer (located in the lib folder)
 
 3. Copy PHPMailer to the lib folder (https://github.com/PHPMailer/PHPMailer/tree/master/src)
 
-4. Set the /config/config.ini file:
+4. Install the mysql database using /db/create_db.sql
+
+5. Set the /config/config.ini file:
 - DEBUG (0, 1, 2 or 3)
 - ssl (http:// or https://)
 - auto_logout time (automatically log out user after so many seconds of inactivity)
