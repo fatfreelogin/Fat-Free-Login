@@ -10,34 +10,41 @@ The script offers the following possibilities:
 - access to pages is controlled by f3-access
 - automatic logout after configurable amount of time 
 - admin section with user management
-- csrf protection (in controllers/Controller.php)
+- csrf protection (in `/app/controllers/Controller.php`)
+- error logs and access logs in `/logs`
 
 ## Getting started
 
 ### Prerequisites
 
 Fat Free Framework 3.6 (https://github.com/bcosca/fatfree)
-F3-access (https://github.com/xfra35/f3-access , located in the lib folder)
-PHPMailer (located in the lib folder)
+
+F3-access (https://github.com/xfra35/f3-access) located in `/vendor/xfra35/f3-access`
+
+PHPMailer 6.0.7 (https://github.com/PHPMailer/PHPMailer) located in `/vendor/phpmailer/phpmailer`
 
 ### Installing
 
-1. Install the Fat Free Framework (https://fatfreeframework.com/3.6/home), then copy all the files of this script to same folder.
+1. Install this repository on your webserver
 
-2. Copy the access.php file from https://github.com/xfra35/f3-access/tree/master/lib to the lib folder
+2. Set the /config/config.ini file:
+	
+	- DEBUG level (0, 1, 2 or 3)
+	- ssl (http:// or https://)
+	- auto_logout time (automatically log out user after so many seconds of inactivity)
+	- database settings
+	- mail smtp settings
 
-3. Copy PHPMailer to the lib folder (https://github.com/PHPMailer/PHPMailer/tree/master/src)
+3. install the example database: located in `/db/create_db.sql`
 
-4. install the example database: located in `/db/create_db.sql`
+```
+mysql -uUSER -pPASSWD
+create database fatfreelogin
+source create_db.sql
+```
 
-5. Set the /config/config.ini file:
-- DEBUG (0, 1, 2 or 3)
-- ssl (http:// or https://)
-- auto_logout time (automatically log out user after so many seconds of inactivity)
-- database settings
-- mail smtp settings
+4. Active login is `admin:fatfree123`
 
-Active login is admin:fatfree123
 
 ## Contributing
 This script is offered as is. 
