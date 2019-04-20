@@ -13,6 +13,7 @@ The script offers the following possibilities:
 - csrf protection (in `/app/controllers/Controller.php`)
 - error logs and access logs in `/logs`
 
+
 ## Getting started
 
 ### Prerequisites
@@ -43,7 +44,16 @@ create database fatfreelogin
 source create_db.sql
 ```
 
+
 4. Active login is `admin:fatfree123`
+
+5. Set the /config/config.ini file:
+- DEBUG (0, 1, 2 or 3)
+- ssl (http:// or https://)
+- auto_logout time (automatically log out user after so many seconds of inactivity)
+- database settings
+- mail smtp settings
+
 
 
 ## Contributing
