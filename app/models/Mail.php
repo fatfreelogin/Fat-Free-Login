@@ -3,9 +3,6 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'lib/PHPMailer/Exception.php';
-require 'lib/PHPMailer/PHPMailer.php';
-require 'lib/PHPMailer/SMTP.php';
 
 class Mail extends Controller {
 
@@ -17,7 +14,7 @@ class Mail extends Controller {
 			$mail->CharSet = 'UTF-8';
 			$mail->SMTPDebug = 0;                                 // 2=Enable verbose debug output
 			$mail->isSMTP();                                      // Set mailer to use SMTP
-			$mail->Host = $this->f3->get('smtp_host');   		  // Specify main and backup SMTP servers
+			$mail->Host = $this->f3->get('smtp_host');   	      // Specify main and backup SMTP servers
 			$mail->SMTPAuth = true;                               // Enable SMTP authentication
 			$mail->Username = $this->f3->get('smtp_user');        // SMTP username
 			$mail->Password = $this->f3->get('smtp_pw');          // SMTP password

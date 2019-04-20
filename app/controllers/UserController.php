@@ -145,10 +145,10 @@ class UserController extends Controller {
 	
 	public function sendactmail($email, $hash)
 	{
-		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST')."/confirm_registration?h=".$hash;
+		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST'). $this->f3->get('BASE')."/confirm_registration?h=".$hash;
 		$mail = new Mail();
 		$mail->send( // sender, recipient, subject, msg
-			$this->f3->get('from_email') , 
+			$this->f3->get('from_email'), 
 			$email, 
 			$this->f3->get('i18n_confirmation_mail_subject') . " " . $this->f3->get('HOST'),
 			$this->f3->get('i18n_confirmation_mail_message')."<a href=\"".$confirmation_link."\">".$confirmation_link . "</a>"
@@ -157,7 +157,7 @@ class UserController extends Controller {
 	}
 	private function pw_reset_mail($email, $hash)
 	{
-		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST')."/pw_reset?h=".$hash;
+		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST'). $this->f3->get('BASE'). "/pw_reset?h=".$hash;
 		$mail = new Mail();
 		$mail->send( // sender, recipient, subject, msg
 			$this->f3->get('from_email') , 

@@ -1,0 +1,21 @@
+{
+	"name": "Fat-Free-Login",
+	"description": "Simple Fat-Free-Login system",
+	"type": "project",
+	"license": "MIT",
+	"authors": [
+	{
+		"name": "someguy",
+		"email": "someguy@mail.com"
+	}
+	],
+	"require": {
+		"xfra35/f3-access": "^1.0",
+		"phpmailer/phpmailer": "^6.0"
+	},
+	"autoload": {
+		"psr-4": { 
+			"": "src"
+		}
+	}
+}

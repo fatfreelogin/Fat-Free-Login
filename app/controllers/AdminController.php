@@ -1,8 +1,8 @@
 <?php
 
 class AdminController extends Controller {
-	protected $f3;
-	protected $db;
+	//~ protected $f3;
+	//~ protected $db;
 		
 	public function users()
 	{	
