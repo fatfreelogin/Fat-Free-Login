@@ -34,7 +34,7 @@ class Mail extends Controller {
 			$mail->isHTML(true);               // Set email format to HTML
 			$mail->Subject = $subject;
 			$mail->Body    = $message;
-			//$mail->AltBody = $message;
+			$mail->AltBody = strip_tags($message);
 			$mail->send();
 			
 		} catch (Exception $e) {

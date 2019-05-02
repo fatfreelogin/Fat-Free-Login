@@ -80,14 +80,12 @@ class UserController extends Controller {
 		}
 	}
 	
-	
 	private function setpw( $newpw, $user_id )
 	{
 		$user = new User($this->db);
 		$user->getById($user_id);
 		
-		$crypt = \Bcrypt::instance();
-		$password = $crypt->hash($newpw);
+		$password = password_hash($newpw, PASSWORD_BCRYPT);
 		
 		//check if user id = session id for security
 		if($user_id == $this->f3->get('SESSION.user_id'))
@@ -145,7 +143,7 @@ class UserController extends Controller {
 	
 	public function sendactmail($email, $hash)
 	{
-		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST')."/confirm_registration?h=".$hash;
+		$confirmation_link = $this->f3->get('SCHEME')."://".$this->f3->get('HOST')."/confirm_registration?h=".$hash;
 		$mail = new Mail();
 		$mail->send( // sender, recipient, subject, msg
 			$this->f3->get('from_email') , 
@@ -155,9 +153,10 @@ class UserController extends Controller {
 		);
 		
 	}
+
 	private function pw_reset_mail($email, $hash)
 	{
-		$confirmation_link = $this->f3->get('ssl').$this->f3->get('HOST')."/pw_reset?h=".$hash;
+		$confirmation_link = $this->f3->get('SCHEME')."://".$this->f3->get('HOST')."/pw_reset?h=".$hash;
 		$mail = new Mail();
 		$mail->send( // sender, recipient, subject, msg
 			$this->f3->get('from_email') , 
@@ -203,6 +202,7 @@ class UserController extends Controller {
 			return "";
 		}		
 	}
+
 	public function create()
 	{
 		if($this->f3->exists('POST.create'))
@@ -214,9 +214,7 @@ class UserController extends Controller {
 				$this->f3->set('view','user/create.htm');
 			}
 			else{
-				$crypt = \Bcrypt::instance();
-				$password = $crypt->hash($this->f3->get('POST.password'));
-				
+				$password = password_hash($this->f3->get('POST.password'), PASSWORD_BCRYPT);
 				$this->f3->set('POST.password', $password);
 				
 				$hash = $this->createHash();
@@ -276,7 +274,7 @@ class UserController extends Controller {
 			$user = new User($this->db);
 			$user->getByName( $this->f3->get('POST.username') );
 
-			if($user->dry() || ! \Bcrypt::instance()->verify($this->f3->get('POST.password'), $user->password))
+			if($user->dry() || ! password_verify($this->f3->get('POST.password'), $user->password))
 			{
 				$this->f3->logger->write( "LOG IN: ".$this->f3->get('POST.username')." login failed (ip: " .$ip .")",'r'  );
 				sleep(2);

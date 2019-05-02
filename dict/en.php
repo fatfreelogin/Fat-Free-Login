@@ -32,7 +32,7 @@ return array(
 	'i18n_other_error'=>'An unexpected error has arisen. If this keeps happening, we would appreciate a quick message about it.',
 	'i18n_email'=>'Email',	
 	'i18n_wrong_login'=>'The combination of username and password is wrong. Try again.',
-	'i18n_not_activated'=>'Your account has not yet been activated. If you haven\'t received an activation mail you can try to send it again: <a href="/sendactivationmail">click here to send the activation mail again</a>.<br>Haven\'t received anything from us?Check your spam folder.',
+	'i18n_not_activated'=>'Your account has not yet been activated. If you haven\'t received an activation mail you can try to send it again: <a href="/sendactivationmail">click here to send the activation mail again</a>.<br>Haven\'t received anything from us? Check your spam folder.',
 	'i18n_send_registration_mail_again'=>'If you haven\'t received a confirmation link in your inbox yyou can try to send it again. Give your email here.<br>No mail received? Check your spam folder.',
 	'i18n_send_registration_mail_again_ok'=>'The mail has been sent.',
 	'i18n_user_success'=>'The user has been created',
@@ -53,6 +53,6 @@ return array(
 	'i18n_reset_pw_submit'=>'Reset Password',
 	'i18n_password_changed'=>'Password changed succesfully',
 	'i18n_password_changed_error'=>'There was a problem changing your password',
-	
+	'i18n_resend_activation_mail'=>'Resend activation mail',
 	'i18n_users'=>'Users'
 );
