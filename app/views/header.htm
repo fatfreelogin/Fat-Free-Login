@@ -37,7 +37,7 @@
 				  <a class="dropdown-item" href="https://stackoverflow.com/questions/tagged/fat-free-framework">Stack Overflow</a>
 				</div>
 			  </li>
-			  <check if="{{ @SESSION.logged_in }}">
+			  <check if="{{ isset(@SESSION.logged_in) && @SESSION.logged_in }}">
 			  <true> 
 				<li class="nav-item dropdown">				
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
