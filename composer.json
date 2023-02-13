@@ -1,0 +1,6 @@
+{
+    "require": {
+        "bcosca/fatfree": "^3.8",
+        "xfra35/f3-access": "^1.2"
+    }
+}
