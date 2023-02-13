@@ -6,6 +6,7 @@ class Controller {
 	protected $db;
 
     function beforeroute() {
+		$this->f3->set('logged_in', $this->f3->get('SESSION.logged_in'));
 		if($this->f3->get('SESSION.logged_in'))
 		{
 			if(time() - $this->f3->get('SESSION.timestamp') > $this->f3->get('auto_logout')) 
