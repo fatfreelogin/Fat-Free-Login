@@ -1,5 +1,5 @@
 
-	</main>
+
 	<!-- /.container -->
 
 	<!-- Footer -->
