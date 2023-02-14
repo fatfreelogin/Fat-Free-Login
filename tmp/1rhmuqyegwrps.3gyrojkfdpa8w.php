@@ -80,7 +80,7 @@
                 </div>
               
               <?php else: ?>
-                <!-- <div class="navbar-end">
+                <div class="navbar-end">
                   <div class="navbar-item">
                     <div class="buttons">
                       <a class="button is-primary">
@@ -91,8 +91,8 @@
                       </a>
                     </div>
                   </div>
-                </div> -->
-                <div class="navbar-item has-dropdown is-hoverable">
+                </div>
+                <!-- <div class="navbar-item has-dropdown is-hoverable">
                   <a class="navbar-link">
                     Login
                   </a>
@@ -105,7 +105,7 @@
                       <button class="btn" type="submit">Login</button>
                     </form>
                   </div>
-                </div>
+                </div> -->
               
             <?php endif; ?>
           </div>

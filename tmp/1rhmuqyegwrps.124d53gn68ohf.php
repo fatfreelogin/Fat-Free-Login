@@ -1,6 +1,6 @@
     <!-- <div class="flex flex-col h-screen justify-between"> -->
 
-<main class="">
+<main style="height: 1000px;">
 	<div class="">
 		<h1>Fat Free Login</h1>
 		<?php if (isset($SESSION['logged_in']) && $SESSION['logged_in']): ?>
