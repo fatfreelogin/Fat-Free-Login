@@ -4,6 +4,18 @@ class FileController { //extends Controller {
 	protected $f3;
 	protected $db;
 
+  function __construct() {
+		$f3=Base::instance();
+		$db=new DB\SQL(
+			$f3->get('db_dns') . $f3->get('db_name'),
+			$f3->get('db_user'),
+			$f3->get('db_pass')
+		);
+		$this->f3=$f3;
+		$this->db=$db;
+    $this->web = \Web::instance();
+	}
+
   public function upload()
 	{
     // Just kill it if they're not even trying
@@ -44,19 +56,7 @@ class FileController { //extends Controller {
       echo "Permission Denied. >:|";
     }    
 	}
-  
-  function __construct() {
-		$f3=Base::instance();
-		$db=new DB\SQL(
-			$f3->get('db_dns') . $f3->get('db_name'),
-			$f3->get('db_user'),
-			$f3->get('db_pass')
-		);
-		$this->f3=$f3;
-		$this->db=$db;
-    $this->web = \Web::instance();
-	}
-  
+    
   function uniqidReal($length = 13) {
     // uniqid gives 13 chars, but you could adjust it to your needs.
     if (function_exists("random_bytes")) {
@@ -69,40 +69,80 @@ class FileController { //extends Controller {
     return substr(bin2hex($bytes), 0, $length);
   }
 
-  function csv2array($filename = 'uploads/FU67c491', $delimiter=",") {
-    // $csv = array_map(function($v){return str_getcsv($v, ';');}, file('uploads/FU67c491'));
-    $filename = 'uploads/FU67c491';
+  function toCamelCase($string) {
+    $capitalizeFirstCharacter = true;
+    $str = str_replace(' ', '', ucwords($string, ' '));
+    if (!$capitalizeFirstCharacter) {
+        $str = lcfirst($str);
+    }
+    return ':'.$str;  //Prepend colon for db->exec array insertion
+  }
+
+  // function csv2array($filename = "uploads/FU67c491", $delimiter = ",") {
+  function csv2array($filename) {
+    // $filename = 'uploads/'.$this->f3->get('PARAMS.filename');;
     $delimiter = ',';
+    echo $filename;
 
     if(!file_exists($filename) || !is_readable($filename))
         return FALSE;
 
     $header = NULL;
     $data = array();
-    if (($handle = fopen($filename, 'r')) !== FALSE)
+        if (($handle = fopen($filename, 'r')) !== FALSE)
     {
         while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
         {
-            // print_r($header);
             if(!$header)
-            //! Hmm, array map needs research...
-                $header = array_map(spacesToCamelCase,$row);
+                $header = array_map([$this, 'toCamelCase'], $row);
             else
                 $data[] = array_combine($header, $row);
         }
         fclose($handle);
     }
-    // return $data;
-
-    // print_r( $data );
+    print_r($data);
+    return $data;
   }
   
-  function spacesToCamelCase($string, $capitalizeFirstCharacter = false) 
-  {
-    $str = str_replace(' ', '', ucwords($string, '-'));
-    if (!$capitalizeFirstCharacter) {
-        $str = lcfirst($str);
+  function chronProcFiles () {
+    /*
+      get list of remaining files from db
+      see if any ID's already reside in booking_data
+        Yay
+          Throw error and email deets
+        Nay
+          Proceed to insert
+
+      ----------------------
+
+      Or not, so coz it seems like FF3 takes care of that
+    */
+
+    // $this->db->exec(
+    //   'INSERT INTO booking_data (`BookingID`, `CustomerID`) VALUES(:BookingID, :CustomerID)',
+    //   array(
+    //     array(':BookingID'=>11, ':CustomerID'=>11),
+    //     array(':BookingID'=>12, ':CustomerID'=>12),
+    //   ) 
+    // );
+    $fileList = $this->db->exec('SELECT filename FROM file_queue where status=1');
+    foreach($fileList as $file) {
+      // echo $file['filename'];
+
+    // try {
+    //   $i = 0;
+    //   $ins_array = [];
+    //   $data_array = [];
+    //   while ($i < 10) {
+    //     array_push($ins_array, 'INSERT INTO booking_data (`BookingID`, `CustomerID`) VALUES(:BookingID, :CustomerID)');
+    //     array_push($data_array, array(':BookingID'=>$i, ':CustomerID'=>$i));
+    //     $i += 1;
+    //   }
+    //   $this->db->exec($ins_array, $data_array);
+    // } catch ( Exception $ex) {
+    //   echo $ex;
+    // }
     }
-    return $str;
   }
+  
 }
