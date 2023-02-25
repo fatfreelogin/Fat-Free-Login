@@ -71,11 +71,11 @@ class FileController { //extends Controller {
 
   function toCamelCase($string) {
     $capitalizeFirstCharacter = true;
-    $str = str_replace(' ', '', ucwords($string, ' '));
+    $str = str_replace([' ','-'], '', ucwords($string, ' '));
     if (!$capitalizeFirstCharacter) {
         $str = lcfirst($str);
     }
-    return ':'.$str;  //Prepend colon for db->exec array insertion
+    return $str;
   }
 
   // function csv2array($filename = "uploads/FU67c491", $delimiter = ",") {
@@ -89,7 +89,7 @@ class FileController { //extends Controller {
 
     $header = NULL;
     $data = array();
-        if (($handle = fopen($filename, 'r')) !== FALSE)
+    if (($handle = fopen($filename, 'r')) !== FALSE)
     {
         while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
         {
@@ -100,7 +100,7 @@ class FileController { //extends Controller {
         }
         fclose($handle);
     }
-    print_r($data);
+    // print_r($data);
     return $data;
   }
   
@@ -127,21 +127,69 @@ class FileController { //extends Controller {
     // );
     $fileList = $this->db->exec('SELECT filename FROM file_queue where status=1');
     foreach($fileList as $file) {
-      // echo $file['filename'];
+      echo 'Trying file: '.$file['filename'];
+      try {
+        if(!file_exists('uploads/'.$file['filename']) || !is_readable('uploads/'.$file['filename'])) {
+          $this->db->exec("UPDATE `btax2022`.`file_queue` SET `status`='0' WHERE  `filename`='".$file['filename']."'");
+          throw new Exception("File (".$file['filename'].") no exist!");
+        }
 
-    // try {
-    //   $i = 0;
-    //   $ins_array = [];
-    //   $data_array = [];
-    //   while ($i < 10) {
-    //     array_push($ins_array, 'INSERT INTO booking_data (`BookingID`, `CustomerID`) VALUES(:BookingID, :CustomerID)');
-    //     array_push($data_array, array(':BookingID'=>$i, ':CustomerID'=>$i));
-    //     $i += 1;
-    //   }
-    //   $this->db->exec($ins_array, $data_array);
-    // } catch ( Exception $ex) {
-    //   echo $ex;
-    // }
+        $data_array = $this->csv2array('uploads/'.$file['filename']);
+        
+        if(!is_array($data_array))
+          throw new Exception("csv2array Error");
+
+        $i = 0;
+        $ins_array = [];
+        $new_data_array = [];
+        $keys = [];
+        foreach(array_keys($data_array[0]) as $paramName)
+          array_push($keys, $paramName);
+
+        // print_r($keys);
+
+        while ($i < count($data_array)) {
+          $cols = $vals = '';
+          $data = [];
+          foreach($keys as $key) {
+            $cols = $cols.'`'.$key.'`, ';
+            $vals = $vals.':'.$key.', ';
+            if (preg_match("#(0?[1-9]|[12][0-9]|3[01])[- \/.](0?[1-9]|1[012])[- \/.](19|20)\d\d (2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])$#",$data_array[$i][$key])) {
+              $data[':'.$key] = substr($data_array[$i][$key],6,4).'-'.substr($data_array[$i][$key],3,2).'-'.substr($data_array[$i][$key],0,2).' '.substr($data_array[$i][$key],11,8);
+            } else {
+              $data[':'.$key] = $data_array[$i][$key];
+              if (preg_match("#([G][B][P])#",$data_array[$i][$key])) {
+                $data[':'.$key] = str_replace('GBP','', $data_array[$i][$key]);
+              } else {
+                if($key=='ActualPickupTime' && strlen($data_array[$i][$key])<5) {
+                  $data[':'.$key] = "1999-01-01 01:23:45";
+                } else {  
+                  $data[':'.$key] = $data_array[$i][$key];
+                }
+              }
+            }
+            if ($key=='BookingID')
+              echo $key.' = '.$data[':'.$key].PHP_EOL;
+          }
+          
+          array_push($ins_array, 'INSERT INTO booking_data ('.rtrim($cols,', ').') VALUES('.rtrim($vals,', ').')');
+          array_push($new_data_array, $data);
+          $i += 1;
+        }
+        // print_r($new_data_array);
+
+        $this->db->exec($ins_array, $new_data_array);
+      
+        $this->db->exec("UPDATE `btax2022`.`file_queue` SET `status`='2' WHERE  `filename`='".$file['filename']."'");
+
+        unlink('uploads/'.$file['filename']);
+
+        echo "File proccessing successful";
+      } catch (Exception $e) {
+        print("Shit, error: ".$e->getMessage());
+      } finally {
+        echo "Pow!";
+      }
     }
   }
   
