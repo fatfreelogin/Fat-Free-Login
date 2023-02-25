@@ -1,0 +1,1 @@
+curl -u admin:fatfree123 localhost/fileup --upload-file %1

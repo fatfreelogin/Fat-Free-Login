@@ -4,6 +4,18 @@ class FileController { //extends Controller {
 	protected $f3;
 	protected $db;
 
+  function __construct() {
+		$f3=Base::instance();
+		$db=new DB\SQL(
+			$f3->get('db_dns') . $f3->get('db_name'),
+			$f3->get('db_user'),
+			$f3->get('db_pass')
+		);
+		$this->f3=$f3;
+		$this->db=$db;
+    $this->web = \Web::instance();
+	}
+
   public function upload()
 	{
     // Just kill it if they're not even trying
@@ -44,19 +56,7 @@ class FileController { //extends Controller {
       echo "Permission Denied. >:|";
     }    
 	}
-  
-  function __construct() {
-		$f3=Base::instance();
-		$db=new DB\SQL(
-			$f3->get('db_dns') . $f3->get('db_name'),
-			$f3->get('db_user'),
-			$f3->get('db_pass')
-		);
-		$this->f3=$f3;
-		$this->db=$db;
-    $this->web = \Web::instance();
-	}
-  
+    
   function uniqidReal($length = 13) {
     // uniqid gives 13 chars, but you could adjust it to your needs.
     if (function_exists("random_bytes")) {
@@ -69,10 +69,20 @@ class FileController { //extends Controller {
     return substr(bin2hex($bytes), 0, $length);
   }
 
-  function csv2array($filename = 'uploads/FU67c491', $delimiter=",") {
-    // $csv = array_map(function($v){return str_getcsv($v, ';');}, file('uploads/FU67c491'));
-    $filename = 'uploads/FU67c491';
+  function toCamelCase($string) {
+    $capitalizeFirstCharacter = true;
+    $str = str_replace([' ','-'], '', ucwords($string, ' '));
+    if (!$capitalizeFirstCharacter) {
+        $str = lcfirst($str);
+    }
+    return $str;
+  }
+
+  // function csv2array($filename = "uploads/FU67c491", $delimiter = ",") {
+  function csv2array($filename) {
+    // $filename = 'uploads/'.$this->f3->get('PARAMS.filename');;
     $delimiter = ',';
+    echo $filename;
 
     if(!file_exists($filename) || !is_readable($filename))
         return FALSE;
@@ -83,26 +93,104 @@ class FileController { //extends Controller {
     {
         while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
         {
-            // print_r($header);
             if(!$header)
-            //! Hmm, array map needs research...
-                $header = array_map(spacesToCamelCase,$row);
+                $header = array_map([$this, 'toCamelCase'], $row);
             else
                 $data[] = array_combine($header, $row);
         }
         fclose($handle);
     }
-    // return $data;
-
-    // print_r( $data );
+    // print_r($data);
+    return $data;
   }
   
-  function spacesToCamelCase($string, $capitalizeFirstCharacter = false) 
-  {
-    $str = str_replace(' ', '', ucwords($string, '-'));
-    if (!$capitalizeFirstCharacter) {
-        $str = lcfirst($str);
+  function chronProcFiles () {
+    /*
+      get list of remaining files from db
+      see if any ID's already reside in booking_data
+        Yay
+          Throw error and email deets
+        Nay
+          Proceed to insert
+
+      ----------------------
+
+      Or not, so coz it seems like FF3 takes care of that
+    */
+
+    // $this->db->exec(
+    //   'INSERT INTO booking_data (`BookingID`, `CustomerID`) VALUES(:BookingID, :CustomerID)',
+    //   array(
+    //     array(':BookingID'=>11, ':CustomerID'=>11),
+    //     array(':BookingID'=>12, ':CustomerID'=>12),
+    //   ) 
+    // );
+    $fileList = $this->db->exec('SELECT filename FROM file_queue where status=1');
+    foreach($fileList as $file) {
+      echo 'Trying file: '.$file['filename'];
+      try {
+        if(!file_exists('uploads/'.$file['filename']) || !is_readable('uploads/'.$file['filename'])) {
+          $this->db->exec("UPDATE `btax2022`.`file_queue` SET `status`='0' WHERE  `filename`='".$file['filename']."'");
+          throw new Exception("File (".$file['filename'].") no exist!");
+        }
+
+        $data_array = $this->csv2array('uploads/'.$file['filename']);
+        
+        if(!is_array($data_array))
+          throw new Exception("csv2array Error");
+
+        $i = 0;
+        $ins_array = [];
+        $new_data_array = [];
+        $keys = [];
+        foreach(array_keys($data_array[0]) as $paramName)
+          array_push($keys, $paramName);
+
+        // print_r($keys);
+
+        while ($i < count($data_array)) {
+          $cols = $vals = '';
+          $data = [];
+          foreach($keys as $key) {
+            $cols = $cols.'`'.$key.'`, ';
+            $vals = $vals.':'.$key.', ';
+            if (preg_match("#(0?[1-9]|[12][0-9]|3[01])[- \/.](0?[1-9]|1[012])[- \/.](19|20)\d\d (2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])$#",$data_array[$i][$key])) {
+              $data[':'.$key] = substr($data_array[$i][$key],6,4).'-'.substr($data_array[$i][$key],3,2).'-'.substr($data_array[$i][$key],0,2).' '.substr($data_array[$i][$key],11,8);
+            } else {
+              $data[':'.$key] = $data_array[$i][$key];
+              if (preg_match("#([G][B][P])#",$data_array[$i][$key])) {
+                $data[':'.$key] = str_replace('GBP','', $data_array[$i][$key]);
+              } else {
+                if($key=='ActualPickupTime' && strlen($data_array[$i][$key])<5) {
+                  $data[':'.$key] = "1999-01-01 01:23:45";
+                } else {  
+                  $data[':'.$key] = $data_array[$i][$key];
+                }
+              }
+            }
+            if ($key=='BookingID')
+              echo $key.' = '.$data[':'.$key].PHP_EOL;
+          }
+          
+          array_push($ins_array, 'INSERT INTO booking_data ('.rtrim($cols,', ').') VALUES('.rtrim($vals,', ').')');
+          array_push($new_data_array, $data);
+          $i += 1;
+        }
+        // print_r($new_data_array);
+
+        $this->db->exec($ins_array, $new_data_array);
+      
+        $this->db->exec("UPDATE `btax2022`.`file_queue` SET `status`='2' WHERE  `filename`='".$file['filename']."'");
+
+        unlink('uploads/'.$file['filename']);
+
+        echo "File proccessing successful";
+      } catch (Exception $e) {
+        print("Shit, error: ".$e->getMessage());
+      } finally {
+        echo "Pow!";
+      }
     }
-    return $str;
   }
+  
 }
