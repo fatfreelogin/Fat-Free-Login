@@ -1,6 +1,6 @@
 <?php
 
-class ApiController extends Controller {
+class ApiController {
 	
 	protected $f3;
 	protected $db;
@@ -15,11 +15,12 @@ class ApiController extends Controller {
 		$this->f3=$f3;
 		$this->db=$db;
     // Do we need this?
-    $this->web = \Web::instance();
+    // $this->web = \Web::instance();
 	}
 
   public function test1 () {
     echo "API Test 1".PHP_EOL;
-    echo "Doesn't actually do anything yet... :D".PHP_EOL;
+		echo "-========-".PHP_EOL.PHP_EOL;
+		print_r($this->db->exec("SELECT * FROM 'booking_data' WHERE BookingID=3861795"));
   }
 }

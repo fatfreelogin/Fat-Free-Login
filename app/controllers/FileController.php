@@ -117,9 +117,6 @@ class FileController { //extends Controller {
 
       Or not, so coz it seems like FF3 takes care of that
     */
-    //! Throwing error but seems to upload data just fine... :/
-    //!   "Shit, error: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: booking_data.BookingIDPow!"
-
     $fileList = $this->db->exec('SELECT filename FROM file_queue where status=1');
     foreach($fileList as $file) {
       echo 'Trying file: '.$file['filename'];
