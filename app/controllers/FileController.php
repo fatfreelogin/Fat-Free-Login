@@ -104,7 +104,7 @@ class FileController { //extends Controller {
     return $data;
   }
   
-  function chronProcFiles () {
+  function cronProcFiles () {
     /*
       get list of remaining files from db
       see if any ID's already reside in booking_data
@@ -117,20 +117,15 @@ class FileController { //extends Controller {
 
       Or not, so coz it seems like FF3 takes care of that
     */
+    //! Throwing error but seems to upload data just fine... :/
+    //!   "Shit, error: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: booking_data.BookingIDPow!"
 
-    // $this->db->exec(
-    //   'INSERT INTO booking_data (`BookingID`, `CustomerID`) VALUES(:BookingID, :CustomerID)',
-    //   array(
-    //     array(':BookingID'=>11, ':CustomerID'=>11),
-    //     array(':BookingID'=>12, ':CustomerID'=>12),
-    //   ) 
-    // );
     $fileList = $this->db->exec('SELECT filename FROM file_queue where status=1');
     foreach($fileList as $file) {
       echo 'Trying file: '.$file['filename'];
       try {
         if(!file_exists('uploads/'.$file['filename']) || !is_readable('uploads/'.$file['filename'])) {
-          $this->db->exec("UPDATE `btax2022`.`file_queue` SET `status`='0' WHERE  `filename`='".$file['filename']."'");
+          $this->db->exec("UPDATE `file_queue` SET `status`='0' WHERE  `filename`='".$file['filename']."'");
           throw new Exception("File (".$file['filename'].") no exist!");
         }
 
@@ -180,7 +175,7 @@ class FileController { //extends Controller {
 
         $this->db->exec($ins_array, $new_data_array);
       
-        $this->db->exec("UPDATE `btax2022`.`file_queue` SET `status`='2' WHERE  `filename`='".$file['filename']."'");
+        $this->db->exec("UPDATE `file_queue` SET `status`='2' WHERE  `filename`='".$file['filename']."'");
 
         unlink('uploads/'.$file['filename']);
 
