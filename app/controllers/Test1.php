@@ -25,14 +25,15 @@ class Test1 {
   function post() {
     echo "Test1: POST ".$this->f3->get("PARAMS.BookingID").PHP_EOL;
     try {
+      //! Going to have to read in column data and map data to array from input
       var_dump($this->db->exec("INSERT INTO `booking_data` (BookingID, CustomerID, RequestedPickupTime) VALUES(?,?,?)", array(
-        1=>$this->get("PARAMS.BookingID"),
+        1=>$this->f3->get("PARAMS.BookingID"),
         2=>"999999",
         3=>"23/03/1971 00:00:01"
       )));
       // throw new Exception("Gaargh!!");
     } catch (Exception $e) {
-      echo $e->get_message();
+      echo $e->getMessage();
     }
   }
   function put() {
