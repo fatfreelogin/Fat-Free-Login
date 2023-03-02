@@ -18,9 +18,21 @@ class ApiController {
     // $this->web = \Web::instance();
 	}
 
-  public function test1 () {
+  public function test1_get () {
     echo "API Test 1".PHP_EOL;
 		echo "-========-".PHP_EOL.PHP_EOL;
 		print_r($this->db->exec("SELECT * FROM 'booking_data' WHERE BookingID=3861795"));
+  }
+
+  public function test1_post() {
+    echo "API Test Create".PHP_EOL;
+    echo "-=============-".PHP_EOL.PHP_EOL;
+    try {
+      //Insert random data with booking id from url
+      //throw new Execption("test");
+      echo "Foo foo";
+    } catch (Exception $e) {
+      echo "test1_post error: ".$e->getMessage();
+    }
   }
 }
