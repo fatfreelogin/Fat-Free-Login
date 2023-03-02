@@ -23,13 +23,14 @@ class Test1 {
     echo json_encode($data);
   }
   function post() {
-    echo "Test1: POST".PHP_EOL;
+    echo "Test1: POST ".$this->f3->get("PARAMS.BookingID").PHP_EOL;
     try {
-      $this->db->exec("INSERT INTO `booking_data` (BookingID, CustomerID, RequestedPickupTime) VALUES(?,?,?)", array(
+      var_dump($this->db->exec("INSERT INTO `booking_data` (BookingID, CustomerID, RequestedPickupTime) VALUES(?,?,?)", array(
         1=>$this->get("PARAMS.BookingID"),
         2=>"999999",
         3=>"23/03/1971 00:00:01"
-      ));
+      )));
+      // throw new Exception("Gaargh!!");
     } catch (Exception $e) {
       echo $e->get_message();
     }
