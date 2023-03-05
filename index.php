@@ -19,5 +19,6 @@ $f3->LANGUAGE = $f3->get('sitelang');
 // });
 
 $f3->logger = new Log('logs/'.date("Ymd").'.log');
+$f3->logger->erase();
 $f3->session = new Session();
 $f3->run();
