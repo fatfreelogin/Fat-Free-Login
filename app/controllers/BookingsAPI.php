@@ -33,6 +33,8 @@ class BookingsAPI extends ApiController {
     $whereArray = [];
 
     foreach($queryArray as $key => $val) {
+      // Replace this with a more betterer, more comprehensive version
+      // to handle all possible SQL operators - like Directus
       array_push($whereArray, str_replace("EQUALS", "=", "(".$key." ".strtoupper(array_keys($val)[0])." '".str_replace(">", "' AND '", array_values($val)[0])."') "));
     }
     print_r($whereArray).PHP_EOL;
@@ -55,5 +57,8 @@ class BookingsAPI extends ApiController {
         )
       )
     );
+  }
+  function test2() {
+    print_r($this->http_parse_query($this->f3->get("QUERY")));
   }
 }
