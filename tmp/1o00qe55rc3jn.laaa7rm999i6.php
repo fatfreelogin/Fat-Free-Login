@@ -11,6 +11,3 @@
 	</footer>
 
 	<?php if (isset($js_imports)): ?><?php echo $this->render($js_imports,NULL,get_defined_vars(),0); ?><?php endif; ?>
-	</body>
-
-</html>
