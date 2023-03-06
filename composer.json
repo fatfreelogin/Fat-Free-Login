@@ -1,6 +1,7 @@
 {
     "require": {
         "bcosca/fatfree": "^3.8",
-        "xfra35/f3-access": "^1.2"
+        "xfra35/f3-access": "^1.2",
+        "ypid/suncalc": "^1.7"
     }
 }

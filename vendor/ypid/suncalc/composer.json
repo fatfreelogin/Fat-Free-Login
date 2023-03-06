@@ -1,0 +1,36 @@
+{
+  "name": "ypid/suncalc",
+  "type": "library",
+  "description": "Calculate sun position, sunlight phases, moon position and lunar phase.",
+  "keywords": [
+    "sun",
+    "moon",
+    "astronomy"
+  ],
+  "homepage": "https://github.com/ypid/suncalc",
+  "support": {
+    "issues": "https://github.com/ypid/suncalc/issues",
+    "docs": "https://ypid.github.io/suncalc/suncalc/SunCalc.html"
+  },
+  "license": "BSD-2-Clause",
+  "authors": [
+    {
+      "name": "Robin Schneider",
+      "nick": "ypid",
+      "email": "ypid@riseup.net",
+      "homepage": "http://ypid.de/",
+      "role": "Maintainer/Rewrite in Haxe",
+      "targets": "all"
+    },
+    {
+      "name": "Vladimir Agafonkin",
+      "nick": "mourner",
+      "email": "agafonkin@gmail.com",
+      "homepage": "http://agafonkin.com/en",
+      "role": "Initial implementation in JavaScript",
+      "targets": [
+        "js"
+      ]
+    }
+  ]
+}

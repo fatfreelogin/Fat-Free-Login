@@ -27,6 +27,9 @@ class Controller {
 		}
 		if ($this->f3->VERB==='POST')
 		{
+      echo 'POST: '.$this->f3->get('POST.session_csrf').PHP_EOL;
+      echo 'PREV: '.$this->f3->get('SESSION.'.$csrf_page.'.csrf').PHP_EOL;
+      
 			if(  $this->f3->get('POST.session_csrf') ==  $this->f3->get('SESSION.'.$csrf_page.'.csrf') ) 
 			{	// Things check out! No CSRF attack was detected.
 				$this->f3->set('CSRF', $this->f3->session->csrf()); // Reset csrf token for next post request

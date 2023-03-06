@@ -114,6 +114,56 @@
                 "source": "https://github.com/xfra35/f3-access/tree/v1.2.2"
             },
             "install-path": "../xfra35/f3-access"
+        },
+        {
+            "name": "ypid/suncalc",
+            "version": "v1.7.0",
+            "version_normalized": "1.7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ypid/suncalc-php.git",
+                "reference": "1157ccbc938189a36fb9adc9ed0b5a4f044909c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ypid/suncalc-php/zipball/1157ccbc938189a36fb9adc9ed0b5a4f044909c1",
+                "reference": "1157ccbc938189a36fb9adc9ed0b5a4f044909c1",
+                "shasum": ""
+            },
+            "time": "2015-12-12T23:32:33+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Robin Schneider",
+                    "email": "ypid@riseup.net",
+                    "homepage": "http://ypid.de/",
+                    "role": "Maintainer/Rewrite in Haxe"
+                },
+                {
+                    "name": "Vladimir Agafonkin",
+                    "email": "agafonkin@gmail.com",
+                    "homepage": "http://agafonkin.com/en",
+                    "role": "Initial implementation in JavaScript"
+                }
+            ],
+            "description": "Calculate sun position, sunlight phases, moon position and lunar phase.",
+            "homepage": "https://github.com/ypid/suncalc",
+            "keywords": [
+                "astronomy",
+                "moon",
+                "sun"
+            ],
+            "support": {
+                "docs": "https://ypid.github.io/suncalc/suncalc/SunCalc.html",
+                "issues": "https://github.com/ypid/suncalc/issues",
+                "source": "https://github.com/ypid/suncalc-php/tree/master"
+            },
+            "install-path": "../ypid/suncalc"
         }
     ],
     "dev": true,

@@ -1,0 +1,10 @@
+Mon, 06 Mar 2023 15:09:15 +0000 [172.31.128.1 (213.78.77.134)] 403: HTTP 403 (POST /login) trace: [app/controllers/Controller.php:37] Base->error()
+Mon, 06 Mar 2023 15:09:15 +0000 [172.31.128.1 (213.78.77.134)] [index.php:37] Base->run()
+Mon, 06 Mar 2023 15:11:39 +0000 [172.31.128.1 (213.78.77.134)] 500: Use of undefined constant PHP - assumed 'PHP' (this will throw an Error in a future version of PHP) trace: [app/controllers/Controller.php:31]
+Mon, 06 Mar 2023 15:11:39 +0000 [172.31.128.1 (213.78.77.134)] [app/controllers/Controller.php:31] Base->{closure}()
+Mon, 06 Mar 2023 15:11:39 +0000 [172.31.128.1 (213.78.77.134)] [index.php:37] Base->run()
+Mon, 06 Mar 2023 15:11:44 +0000 [172.31.128.1 (213.78.77.134)] 500: Use of undefined constant PHP - assumed 'PHP' (this will throw an Error in a future version of PHP) trace: [app/controllers/Controller.php:31]
+Mon, 06 Mar 2023 15:11:44 +0000 [172.31.128.1 (213.78.77.134)] [app/controllers/Controller.php:31] Base->{closure}()
+Mon, 06 Mar 2023 15:11:44 +0000 [172.31.128.1 (213.78.77.134)] [index.php:37] Base->run()
+Mon, 06 Mar 2023 15:12:55 +0000 [172.31.128.1 (213.78.77.134)] 403: HTTP 403 (POST /login) trace: [app/controllers/Controller.php:40] Base->error()
+Mon, 06 Mar 2023 15:12:55 +0000 [172.31.128.1 (213.78.77.134)] [index.php:37] Base->run()
