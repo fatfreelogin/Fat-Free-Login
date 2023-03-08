@@ -57,13 +57,11 @@ class UserController extends Controller {
 			{
 				$this->f3->set('message', $pwcheck);
 				$this->f3->set('view','user/change-pw.htm');
-			}
-			else{
+			} else {
 				if($this->setpw( $this->f3->get('POST.new_password'), $user->id))
 				{
 					$this->f3->reroute('/login');
-				}
-				else{
+				} else {
 					$this->f3->error(403);
 				}
 			}
@@ -71,9 +69,7 @@ class UserController extends Controller {
 		else if(strcmp($this->f3->get('POST.hash'),$this->f3->get('GET.h'))===0)
 		{
 			$this->f3->set('view','user/change-pw.htm');
-		}
-		else 
-		{
+		} else {
 			$this->f3->set('page_head',$this->f3->get('i18n_error'));
 			$this->f3->set('message',$this->f3->get('i18n_register_oops') );
 			$this->f3->set('view','page/message.htm');
@@ -259,7 +255,7 @@ class UserController extends Controller {
 	{
 		if( $this->f3->get('SESSION.logged_in'))
 		{
-			$this->f3->reroute('/');
+			$this->f3->reroute('https://BTAXFF3PetiteVue.spurblickale.repl.co/');
 		}
 		else if($this->f3->exists('POST.login')) // OR $this->f3->VERB=='POST'
 		{
@@ -276,7 +272,7 @@ class UserController extends Controller {
 
 			if($user->dry() || ! password_verify($this->f3->get('POST.password'), $user->password))
 			{
-				$this->f3->logger->write( "LOG IN: ".$this->f3->get('POST.username')." login failed (ip: " .$ip .")",'r'  );
+				$this->f3->logger->write( "1LOG IN: ".$this->f3->get('POST.username')." login failed (ip: " .$ip .")",'r'  );
 				sleep(2);
 				$this->f3->set('message', $this->f3->get('i18n_wrong_login'));
 				$this->f3->set('page_head','Login');
@@ -284,7 +280,7 @@ class UserController extends Controller {
 			}
 			else if ($user->activated===0)
 			{
-				$this->f3->logger->write( "LOG IN: ".$this->f3->get('POST.username')." not activated (ip: " .$ip .")",'r'  );
+				$this->f3->logger->write( "2LOG IN: ".$this->f3->get('POST.username')." not activated (ip: " .$ip .")",'r'  );
 				$this->f3->set('message',  $this->f3->get('i18n_not_activated'));
 				$this->f3->set('page_head','Login');
 				$this->f3->set('view','user/login.htm');
@@ -293,10 +289,10 @@ class UserController extends Controller {
 			{
 				$this->f3->set('SESSION.user_id', $user->id);
 				$user->login($user->id);
-				$this->f3->logger->write( "LOG IN: ".$this->f3->get('POST.username')." login success (ip: " .$ip .")",'r'  );
+				$this->f3->logger->write( "3LOG IN: ".$this->f3->get('POST.username')." login success (ip: " .$ip .")",'r'  );
 				$this->f3->set('SESSION.logged_in', 'true');
 				$this->f3->set('SESSION.timestamp', time());
-				$this->f3->reroute('/');
+				$this->f3->reroute('https://BTAXFF3PetiteVue.spurblickale.repl.co/');
 			}
 		} 
 		else
@@ -310,7 +306,7 @@ class UserController extends Controller {
 	{
 		$this->f3->clear('SESSION');
 		$this->f3->set('page_head','Logout');
-		$this->f3->reroute('/');
+		$this->f3->reroute($this->f3->get("BASE").'/');
 	}
 
 	public function update()

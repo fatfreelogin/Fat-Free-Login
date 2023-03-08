@@ -1,0 +1,43 @@
+Tue, 07 Mar 2023 14:37:21 +0000 [172.31.128.1 (82.132.230.106)] 403: HTTP 403 (POST /login) trace: [app/controllers/Controller.php:38] Base->error()
+Tue, 07 Mar 2023 14:37:21 +0000 [172.31.128.1 (82.132.230.106)] [index.php:40] Base->run()
+Tue, 07 Mar 2023 14:48:58 +0000 [172.31.128.1 (82.132.230.106)] 500: Use of undefined constant logged_in - assumed 'logged_in' (this will throw an Error in a future version of PHP) trace: [tmp/1o00qe55rc3jn.3gyrojkfdpa8w.php:12]
+Tue, 07 Mar 2023 14:48:58 +0000 [172.31.128.1 (82.132.230.106)] [tmp/1o00qe55rc3jn.3gyrojkfdpa8w.php:12] Base->{closure}()
+Tue, 07 Mar 2023 14:48:58 +0000 [172.31.128.1 (82.132.230.106)] [tmp/1o00qe55rc3jn.3h31n1yj254w8.php:9] Preview->render()
+Tue, 07 Mar 2023 14:48:58 +0000 [172.31.128.1 (82.132.230.106)] [app/controllers/Controller.php:57] Preview->render()
+Tue, 07 Mar 2023 14:48:58 +0000 [172.31.128.1 (82.132.230.106)] [index.php:40] Base->run()
+Tue, 07 Mar 2023 14:54:27 +0000 [172.31.128.1 (82.132.230.106)] 500: Unable to open foter.htm trace: [tmp/1o00qe55rc3jn.3h31n1yj254w8.php:13] Preview->render()
+Tue, 07 Mar 2023 14:54:27 +0000 [172.31.128.1 (82.132.230.106)] [app/controllers/Controller.php:57] Preview->render()
+Tue, 07 Mar 2023 14:54:27 +0000 [172.31.128.1 (82.132.230.106)] [index.php:40] Base->run()
+Tue, 07 Mar 2023 15:11:09 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 15:11:09 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 15:11:09 +0000 [172.31.128.1 (82.132.230.106)] [index.php:40] Session->__construct()
+Tue, 07 Mar 2023 15:11:24 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 15:11:24 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 15:11:24 +0000 [172.31.128.1 (82.132.230.106)] [index.php:40] Session->__construct()
+Tue, 07 Mar 2023 15:11:41 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 15:11:41 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 15:11:41 +0000 [172.31.128.1 (82.132.230.106)] [index.php:40] Session->__construct()
+Tue, 07 Mar 2023 15:12:14 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when headers already sent trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 15:12:14 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 15:12:14 +0000 [172.31.128.1 (82.132.230.106)] [index.php:40] Session->__construct()
+Tue, 07 Mar 2023 15:28:14 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 15:28:14 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 15:28:14 +0000 [172.31.128.1 (82.132.230.106)] [index.php:41] Session->__construct()
+Tue, 07 Mar 2023 15:28:24 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 15:28:24 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 15:28:24 +0000 [172.31.128.1 (82.132.230.106)] [index.php:41] Session->__construct()
+Tue, 07 Mar 2023 15:28:46 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 15:28:46 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 15:28:46 +0000 [172.31.128.1 (82.132.230.106)] [index.php:41] Session->__construct()
+Tue, 07 Mar 2023 16:59:35 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 16:59:35 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 16:59:35 +0000 [172.31.128.1 (82.132.230.106)] [index.php:42] Session->__construct()
+Tue, 07 Mar 2023 16:59:42 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 16:59:42 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 16:59:42 +0000 [172.31.128.1 (82.132.230.106)] [index.php:42] Session->__construct()
+Tue, 07 Mar 2023 16:59:55 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 16:59:55 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 16:59:55 +0000 [172.31.128.1 (82.132.230.106)] [index.php:42] Session->__construct()
+Tue, 07 Mar 2023 17:00:06 +0000 [172.31.128.1 (82.132.230.106)] 500: session_set_save_handler(): Cannot change save handler when session is active trace: [vendor/bcosca/fatfree-core/session.php:184]
+Tue, 07 Mar 2023 17:00:06 +0000 [172.31.128.1 (82.132.230.106)] [vendor/bcosca/fatfree-core/session.php:184] session_set_save_handler()
+Tue, 07 Mar 2023 17:00:06 +0000 [172.31.128.1 (82.132.230.106)] [index.php:42] Session->__construct()

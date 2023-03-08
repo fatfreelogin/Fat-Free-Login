@@ -63,7 +63,7 @@
             <a class="button is-primary">
               <strong>Sign up</strong>
             </a>
-            <a class="button is-light" href="/login">
+            <a class="button is-light" href="https://BTAXFF3PetiteVue.spurblickale.repl.co/login">
               Log in
             </a>
           </div>

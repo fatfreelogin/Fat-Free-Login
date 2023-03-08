@@ -175,15 +175,17 @@ class Session extends Magic {
 	function __construct($onsuspect=NULL,$key=NULL,$cache=null) {
 		$this->onsuspect=$onsuspect;
 		$this->_cache=$cache?:Cache::instance();
-		session_set_save_handler(
-			[$this,'open'],
-			[$this,'close'],
-			[$this,'read'],
-			[$this,'write'],
-			[$this,'destroy'],
-			[$this,'cleanup']
-		);
-		register_shutdown_function('session_commit');
+   if (session_status() !== PHP_SESSION_ACTIVE) {
+      session_set_save_handler(
+  			[$this,'open'],
+  			[$this,'close'],
+  			[$this,'read'],
+  			[$this,'write'],
+  			[$this,'destroy'],
+  			[$this,'cleanup']
+  		);
+    }
+  	register_shutdown_function('session_commit');
 		$fw=\Base::instance();
 		$headers=$fw->HEADERS;
 		$this->_csrf=$fw->hash($fw->SEED.

@@ -8,6 +8,8 @@ $f3->config('config/routes.ini');
 
 $f3->LANGUAGE = $f3->get('sitelang');
 
+$f3->set('BASE', 'https://BTAXFF3PetiteVue.spurblickale.repl.co');
+
 $f3->set('ONERROR',function($f3){
   echo \Template::instance()->render('error.html');
   $e = $f3->get('EXCEPTION');
@@ -30,8 +32,12 @@ $f3->set(
     "09:00:00"
   )
 );
+//$f3->set('SESSION.test',123);
+//echo $f3->get('SESSION.test');
+
+
 
 $f3->logger = new Log('logs/'.date("Ymd").'.log');
 $f3->logger->erase();
-$f3->session = new Session();
+// $f3->session = new Session();
 $f3->run();
